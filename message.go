@@ -138,7 +138,7 @@ func MessageParse(buf *Buffer, validate ...bool) (Message, error) {
 		crc := Crc16Calculate(buf.Bytes[crcStart:crcEnd], crcEnd-crcStart)
 		fmt.Printf("%04x-%04x\n", crc, msg.Crc)
 
-		if crc == msg.Crc {
+		if crc != msg.Crc {
 			err := errors.New("Crc error")
 			return msg, err
 		}
